@@ -4,12 +4,13 @@ import { useEffect } from "react";
 
 export const Redirection = ({ auth = false, children }) => {
   const token = useToken();
+  const navigate = useNavigate();
   useEffect(() => {
     if (!auth && !token) {
-      useNavigate("/signin");
+      navigate("/signin");
     }
     if (auth && token) {
-      useNavigate("/plan");
+      navigate("/plan");
     }
   });
   return <>{children}</>;

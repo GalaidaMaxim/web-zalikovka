@@ -6,7 +6,7 @@ export const signInOperation = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await signIn(data);
-      return result;
+      return result.token;
     } catch ({ response }) {
       const error = {
         status: response.status,

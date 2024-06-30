@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { SignInPage } from "./pages/SingIPage";
+import { Redirection } from "./components/Redirection/Redirection";
 
 const darkTheme = createTheme({
   palette: {
@@ -41,8 +42,23 @@ function App() {
         <Header />
         <Box marginTop={4} component={"main"}>
           <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/signin" element={<SignInPage />} />
+            <Route
+              path="/"
+              element={
+                <Redirection auth>
+                  <MainPage />
+                </Redirection>
+              }
+            />
+
+            <Route
+              path="/signin"
+              element={
+                <Redirection auth>
+                  <SignInPage />
+                </Redirection>
+              }
+            />
           </Routes>
         </Box>
       </Box>
