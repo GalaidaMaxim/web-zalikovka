@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { SignInPage } from "./pages/SingIPage";
 import { Redirection } from "./components/Redirection/Redirection";
+import { EducationPlan } from "./pages/EducationPlan";
 
 const darkTheme = createTheme({
   palette: {
@@ -56,6 +57,15 @@ function App() {
               element={
                 <Redirection auth>
                   <SignInPage />
+                </Redirection>
+              }
+            />
+
+            <Route
+              path="/plan"
+              element={
+                <Redirection>
+                  <EducationPlan />
                 </Redirection>
               }
             />

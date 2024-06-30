@@ -4,6 +4,9 @@ import { NavLink } from "react-router-dom";
 import { useToken } from "../../redux/selectors";
 import { ContainerCustom } from "../Container/Container";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutOperation } from "../../redux/operations";
+import { forgetStudent } from "../../redux/slises";
 
 const StyledHeader = styled(AppBar)`
   /* background-color: #ffffff; */
@@ -27,7 +30,7 @@ const Link = styled(NavLink)`
 export const Header = () => {
   const token = useToken();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   return (
     <StyledHeader position="static">
       <ContainerCustom
@@ -46,12 +49,12 @@ export const Header = () => {
         </Link>
         {token && (
           <Navigation component={"nav"}>
-            <Link>
+            <Link to={"/plan"}>
               <Typography color={"text.primary"} variant={"body1"}>
                 Індивідуальний план
               </Typography>
             </Link>
-            <Link>
+            <Link to={"/marks"}>
               <Typography color={"text.primary"} variant={"body1"}>
                 Оцінки
               </Typography>
@@ -65,7 +68,12 @@ export const Header = () => {
             </Typography>
           </Button>
         ) : (
-          <Button>
+          <Button
+            onClick={() => {
+              dispatch(forgetStudent());
+              dispatch(logoutOperation(token));
+            }}
+          >
             <Typography color={"text.primary"} variant={"body1"}>
               Вийти
             </Typography>

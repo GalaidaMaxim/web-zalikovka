@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { tokenSlice } from "./slises";
+import { tokenSlice, studentSlice } from "./slises";
 
 export const store = configureStore({
   reducer: {
     token: tokenSlice.reducer,
+    student: studentSlice.reducer,
   },
 });
