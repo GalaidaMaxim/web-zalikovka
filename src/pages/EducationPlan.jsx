@@ -16,22 +16,14 @@ import {
 
 export const EducationPlan = () => {
   const student = useStudent();
-  const token = useToken();
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!token || student) {
-      return;
-    }
-    dispatch(getStudentOperation(token));
-  }, [dispatch, student, token]);
   return (
     <ContainerCustom>
       {student && (
         <Paper>
           <Box padding={2}>
             <Typography variant="h2">{`${student.sername} ${student.name} ${student.secondName}`}</Typography>
-            <Typography variant="body1">{`${student.course} ${student.level} ${student.department.name}`}</Typography>
+            <Typography variant="body1">{`${student.course} ${student.level}`}</Typography>
             <Box marginTop={4}>
               <Typography variant="h3">{`Обов'язкові дисципліни`}</Typography>
               <Table>

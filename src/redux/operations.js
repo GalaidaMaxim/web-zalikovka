@@ -6,7 +6,7 @@ export const signInOperation = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await signIn(data);
-      return result.token;
+      return result;
     } catch ({ response }) {
       const error = {
         status: response.status,
@@ -22,22 +22,6 @@ export const logoutOperation = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const result = await logout(data);
-      return result;
-    } catch ({ response }) {
-      const error = {
-        status: response.status,
-        message: response.data.message,
-      };
-      return rejectWithValue(error);
-    }
-  }
-);
-
-export const getStudentOperation = createAsyncThunk(
-  "student/get",
-  async (data, { rejectWithValue }) => {
-    try {
-      const result = await getStudent(data);
       return result;
     } catch ({ response }) {
       const error = {

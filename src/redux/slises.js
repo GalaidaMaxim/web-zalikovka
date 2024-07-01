@@ -9,51 +9,20 @@ export const studentSlice = createSlice({
   name: "student",
   initialState: {
     value: null,
-    error: null,
-    loading: false,
-  },
-  reducers: {
-    forgetStudent: (state) => {
-      state.value = null;
-      state.error = null;
-      state.loading = false;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getStudentOperation.pending, (state) => {
-      state.loading = true;
-      state.value = null;
-      state.error = null;
-    });
-    builder.addCase(getStudentOperation.fulfilled, (state, { payload }) => {
-      state.loading = false;
-      state.value = payload;
-      state.error = null;
-    });
-    builder.addCase(getStudentOperation.rejected, (state, { payload }) => {
-      state.loading = false;
-      state.value = null;
-      state.error = payload;
-    });
-  },
-});
-
-export const tokenSlice = createSlice({
-  name: "token",
-  initialState: {
-    value: "",
     loading: false,
     error: null,
   },
   reducers: {
-    clearToken: (state) => {
-      state.value = "";
+    clearStudent: (state) => {
+      state.value = null;
+      state.loading = false;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(signInOperation.pending, (state) => {
       state.loading = true;
-      state.value = "";
+      state.value = null;
       state.error = null;
     });
     builder.addCase(signInOperation.fulfilled, (state, { payload }) => {
@@ -63,7 +32,7 @@ export const tokenSlice = createSlice({
     });
     builder.addCase(signInOperation.rejected, (state, { payload }) => {
       state.loading = false;
-      state.value = "";
+      state.value = null;
       state.error = payload;
     });
     builder.addCase(logoutOperation.pending, (state, { payload }) => {
@@ -72,7 +41,7 @@ export const tokenSlice = createSlice({
     });
     builder.addCase(logoutOperation.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.value = "";
+      state.value = null;
       state.error = null;
     });
     builder.addCase(logoutOperation.rejected, (state, { payload }) => {
@@ -82,5 +51,4 @@ export const tokenSlice = createSlice({
   },
 });
 
-export const { setToken, clearToken } = tokenSlice.actions;
-export const { forgetStudent } = studentSlice.actions;
+export const { setToken, clearStudent } = studentSlice.actions;

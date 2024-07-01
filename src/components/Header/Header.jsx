@@ -6,7 +6,6 @@ import { ContainerCustom } from "../Container/Container";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutOperation } from "../../redux/operations";
-import { forgetStudent } from "../../redux/slises";
 
 const StyledHeader = styled(AppBar)`
   /* background-color: #ffffff; */
@@ -70,7 +69,6 @@ export const Header = () => {
         ) : (
           <Button
             onClick={() => {
-              dispatch(forgetStudent());
               dispatch(logoutOperation(token));
             }}
           >
