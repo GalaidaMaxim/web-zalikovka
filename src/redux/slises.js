@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  signInOperation,
-  logoutOperation,
-  getStudentOperation,
-} from "./operations";
+import { signInOperation, logoutOperation } from "./operations";
 
 export const studentSlice = createSlice({
   name: "student",

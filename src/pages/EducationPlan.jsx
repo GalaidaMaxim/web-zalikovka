@@ -1,14 +1,12 @@
-import { useDispatch } from "react-redux";
-import { getStudentOperation } from "../redux/operations";
-import { useToken, useStudent } from "../redux/selectors";
+import { useStudent } from "../redux/selectors";
 import { ContainerCustom } from "../components/Container/Container";
-import { useEffect } from "react";
+import { StudentHead } from "../components/StudentHead/StudentHead";
+
 import {
   Box,
   Paper,
   Typography,
   Table,
-  TableHead,
   TableBody,
   TableCell,
   TableRow,
@@ -22,8 +20,7 @@ export const EducationPlan = () => {
       {student && (
         <Paper>
           <Box padding={2}>
-            <Typography variant="h2">{`${student.sername} ${student.name} ${student.secondName}`}</Typography>
-            <Typography variant="body1">{`${student.course} ${student.level}`}</Typography>
+            <StudentHead student={student} />
             <Box marginTop={4}>
               <Typography variant="h3">{`Обов'язкові дисципліни`}</Typography>
               <Table>

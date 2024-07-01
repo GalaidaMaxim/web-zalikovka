@@ -1,6 +1,9 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3001/";
+const baseURLRenderer = "https://webdecanatserver.onrender.com";
+// const localBaseUrl = "http://localhost:3001/";
+
+axios.defaults.baseURL = baseURLRenderer;
 
 export const signIn = async (ticketCode) => {
   const student = await axios.post("/students/auth", { ticketCode });

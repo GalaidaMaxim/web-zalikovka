@@ -6,6 +6,7 @@ import { MainPage } from "./pages/MainPage";
 import { SignInPage } from "./pages/SingIPage";
 import { Redirection } from "./components/Redirection/Redirection";
 import { EducationPlan } from "./pages/EducationPlan";
+import { Marks } from "./pages/Marks";
 
 const darkTheme = createTheme({
   palette: {
@@ -41,7 +42,7 @@ function App() {
       <CssBaseline />
       <Box>
         <Header />
-        <Box marginTop={4} component={"main"}>
+        <Box marginTop={4} marginBottom={4} component={"main"}>
           <Routes>
             <Route
               path="/"
@@ -66,6 +67,14 @@ function App() {
               element={
                 <Redirection>
                   <EducationPlan />
+                </Redirection>
+              }
+            />
+            <Route
+              path="/marks"
+              element={
+                <Redirection>
+                  <Marks />
                 </Redirection>
               }
             />

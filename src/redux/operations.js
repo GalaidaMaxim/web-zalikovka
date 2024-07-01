@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { signIn, logout, getStudent } from "../service/api";
+import { signIn, logout } from "../service/api";
 
 export const signInOperation = createAsyncThunk(
   "student/signin",
