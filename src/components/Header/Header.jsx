@@ -1,4 +1,11 @@
-import { AppBar, Typography, Button, Box } from "@mui/material";
+import {
+  AppBar,
+  Typography,
+  Button,
+  Box,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import { useToken } from "../../redux/selectors";
@@ -6,15 +13,14 @@ import { ContainerCustom } from "../Container/Container";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutOperation } from "../../redux/operations";
+import { MobileNvaigation } from "./MobileNavigation";
 
 const StyledHeader = styled(AppBar)`
-  /* background-color: #ffffff; */
   height: 4rem;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 2rem;
-  padding-right: 2rem;
+
   justify-content: space-between;
 `;
 
@@ -30,6 +36,12 @@ export const Header = () => {
   const token = useToken();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const isPhone = useMediaQuery(theme.breakpoints.down("tablet"));
+
+  const logout = () => {
+    dispatch(logoutOperation(token));
+  };
   return (
     <StyledHeader position="static">
       <ContainerCustom
@@ -46,37 +58,38 @@ export const Header = () => {
             Web Заліковка
           </Typography>
         </Link>
-        {token && (
-          <Navigation component={"nav"}>
-            <Link to={"/plan"}>
-              <Typography color={"text.primary"} variant={"body1"}>
-                Індивідуальний план
-              </Typography>
-            </Link>
-            <Link to={"/marks"}>
-              <Typography color={"text.primary"} variant={"body1"}>
-                Оцінки
-              </Typography>
-            </Link>
-          </Navigation>
+        {!isPhone && (
+          <>
+            {token && (
+              <Navigation component={"nav"}>
+                <Link to={"/plan"}>
+                  <Typography color={"text.primary"} variant={"body1"}>
+                    Індивідуальний план
+                  </Typography>
+                </Link>
+                <Link to={"/marks"}>
+                  <Typography color={"text.primary"} variant={"body1"}>
+                    Оцінки
+                  </Typography>
+                </Link>
+              </Navigation>
+            )}
+            {!token ? (
+              <Button onClick={() => navigate("/signin")}>
+                <Typography color={"text.primary"} variant={"body1"}>
+                  Увійти
+                </Typography>
+              </Button>
+            ) : (
+              <Button onClick={logout}>
+                <Typography color={"text.primary"} variant={"body1"}>
+                  Вийти
+                </Typography>
+              </Button>
+            )}
+          </>
         )}
-        {!token ? (
-          <Button onClick={() => navigate("/signin")}>
-            <Typography color={"text.primary"} variant={"body1"}>
-              Увійти
-            </Typography>
-          </Button>
-        ) : (
-          <Button
-            onClick={() => {
-              dispatch(logoutOperation(token));
-            }}
-          >
-            <Typography color={"text.primary"} variant={"body1"}>
-              Вийти
-            </Typography>
-          </Button>
-        )}
+        {isPhone && <MobileNvaigation logout={logout} />}
       </ContainerCustom>
     </StyledHeader>
   );

@@ -7,6 +7,8 @@ import {
   TableRow,
   Typography,
   Box,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 
 import { StudentHead } from "../components/StudentHead/StudentHead";
@@ -21,6 +23,8 @@ export const Marks = () => {
   const [semester, setSemester] = useState(1);
   const [subjects, setSubjects] = useState([]);
   const student = useStudent();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("tablet"));
 
   useEffect(() => {
     if (!student) {
@@ -28,9 +32,9 @@ export const Marks = () => {
       return;
     }
     setSubjects(
-      student.subjects.filter(
-        (subject) => subject.semesters[semester - 1].include
-      )
+      student.subjects.filter((subject) => {
+        return subject.semesters[semester - 1].include;
+      })
     );
   }, [student, semester, setSubjects]);
 
@@ -43,11 +47,16 @@ export const Marks = () => {
               <StudentHead student={student} />
               <Box
                 display={"flex"}
-                gap={20}
+                gap={{
+                  mobile: 4,
+                  tablet: 20,
+                }}
                 alignItems={"center"}
                 marginTop={4}
               >
-                <Typography variant="h3">Оберіть семестр</Typography>
+                <Typography minWidth={"200px"} variant="h3">
+                  Оберіть семестр
+                </Typography>
                 <Box width={"300px"}>
                   <SemesterSelector
                     semester={semester}
@@ -60,15 +69,19 @@ export const Marks = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Назва прежмету</TableCell>
+                        <TableCell>Назва предмету</TableCell>
                         <TableCell>Оцінка</TableCell>
-                        <TableCell>ECTS</TableCell>
-                        <TableCell>Національна шкала</TableCell>
+                        {!isMobile && (
+                          <>
+                            <TableCell>ECTS</TableCell>
+                            <TableCell>Національна шкала</TableCell>
+                          </>
+                        )}
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {subjects.map((subject) => (
-                        <TableRow>
+                        <TableRow key={subject._id}>
                           <TableCell>{subject.name}</TableCell>
                           <TableCell
                             sx={{
@@ -78,30 +91,36 @@ export const Marks = () => {
                               ),
                             }}
                           >
-                            {subject.semesters[semester - 1].mark}
+                            {subject.semesters[semester - 1].mark
+                              ? subject.semesters[semester - 1].mark.slice(0, 3)
+                              : ""}
                           </TableCell>
-                          <TableCell
-                            sx={{
-                              backgroundColor: getColor(
-                                subject.semesters[semester - 1].ignore,
-                                subject.semesters[semester - 1].reDelivery
-                              ),
-                            }}
-                          >
-                            {intToABC(subject.semesters[semester - 1].mark)}
-                          </TableCell>
-                          <TableCell
-                            sx={{
-                              backgroundColor: getColor(
-                                subject.semesters[semester - 1].ignore,
-                                subject.semesters[semester - 1].reDelivery
-                              ),
-                            }}
-                          >
-                            {intToNational(
-                              subject.semesters[semester - 1].mark
-                            )}
-                          </TableCell>
+                          {!isMobile && (
+                            <>
+                              <TableCell
+                                sx={{
+                                  backgroundColor: getColor(
+                                    subject.semesters[semester - 1].ignore,
+                                    subject.semesters[semester - 1].reDelivery
+                                  ),
+                                }}
+                              >
+                                {intToABC(subject.semesters[semester - 1].mark)}
+                              </TableCell>
+                              <TableCell
+                                sx={{
+                                  backgroundColor: getColor(
+                                    subject.semesters[semester - 1].ignore,
+                                    subject.semesters[semester - 1].reDelivery
+                                  ),
+                                }}
+                              >
+                                {intToNational(
+                                  subject.semesters[semester - 1].mark
+                                )}
+                              </TableCell>
+                            </>
+                          )}
                         </TableRow>
                       ))}
                     </TableBody>

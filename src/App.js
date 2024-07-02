@@ -1,40 +1,13 @@
 import { Box } from "@mui/material";
 import { Header } from "./components/Header/Header";
-import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { SignInPage } from "./pages/SingIPage";
 import { Redirection } from "./components/Redirection/Redirection";
 import { EducationPlan } from "./pages/EducationPlan";
 import { Marks } from "./pages/Marks";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-  typography: {
-    fontSize: 16,
-    h1: {
-      fontSize: "36px",
-      fontWeight: 700,
-    },
-    h2: {
-      fontSize: "32px",
-      fontWeight: 700,
-    },
-    h3: {
-      fontSize: "24px",
-      fontWeight: 600,
-    },
-  },
-  values: {
-    xs: 0,
-    sm: 380,
-    md: 768,
-    lg: 1280,
-    xl: 1536,
-  },
-});
+import { darkTheme } from "./theme/darkTheme";
 
 function App() {
   return (

@@ -15,7 +15,10 @@ export const SignInPage = () => {
       <Paper
         elevation={3}
         sx={{
-          width: "600px",
+          width: {
+            mobile: "300px",
+            tablet: "600px",
+          },
           height: "300px",
           marginLeft: "auto",
           marginRight: "auto",

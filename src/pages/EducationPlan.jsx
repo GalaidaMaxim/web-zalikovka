@@ -28,7 +28,7 @@ export const EducationPlan = () => {
                   {student.subjects
                     .filter((sub) => sub.code.charAt(0) === "1")
                     .map((subject) => (
-                      <TableRow>
+                      <TableRow key={subject._id}>
                         <TableCell>{subject.name}</TableCell>
                       </TableRow>
                     ))}
@@ -42,7 +42,7 @@ export const EducationPlan = () => {
                   {student.subjects
                     .filter((sub) => sub.code.charAt(0) === "2")
                     .map((subject) => (
-                      <TableRow>
+                      <TableRow key={subject._id}>
                         <TableCell>{subject.name}</TableCell>
                       </TableRow>
                     ))}
@@ -56,7 +56,7 @@ export const EducationPlan = () => {
                   {student.subjects
                     .filter((sub) => sub.code.charAt(0) === "3")
                     .map((subject) => (
-                      <TableRow>
+                      <TableRow key={subject._id}>
                         <TableCell>{subject.name}</TableCell>
                       </TableRow>
                     ))}
@@ -70,7 +70,7 @@ export const EducationPlan = () => {
                   {student.subjects
                     .filter((sub) => sub.code.charAt(0) === "4")
                     .map((subject) => (
-                      <TableRow>
+                      <TableRow key={subject._id}>
                         <TableCell>{subject.name}</TableCell>
                       </TableRow>
                     ))}

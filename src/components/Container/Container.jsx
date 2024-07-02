@@ -6,11 +6,9 @@ export const ContainerCustom = ({ sx, children }) => {
       sx={Object.assign(
         {
           maxWidth: {
-            xs: "100%",
-            sm: "300px",
-            md: "736px",
-            lg: "1240px",
-            xl: "1240px",
+            mobile: "90%",
+            tablet: "736px",
+            laptop: "1220px",
           },
         },
         sx
