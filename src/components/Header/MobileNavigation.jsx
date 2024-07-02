@@ -1,7 +1,6 @@
 import {
   Drawer,
   IconButton,
-  Paper,
   Box,
   Typography,
   Table,
