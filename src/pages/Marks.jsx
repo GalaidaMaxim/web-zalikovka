@@ -13,11 +13,13 @@ import {
 
 import { StudentHead } from "../components/StudentHead/StudentHead";
 import { ContainerCustom } from "../components/Container/Container";
-import { useStudent } from "../redux/selectors";
+import { useStudent, useToken } from "../redux/selectors";
 import { SemesterSelector } from "../components/SemesterSelector/SemesterSelector";
 import { useState, useEffect } from "react";
 import { intToABC, intToNational } from "../service/formulas";
 import { getColor } from "../service/getColor";
+import { refreshInfo } from "../redux/operations";
+import { useDispatch } from "react-redux";
 
 export const Marks = () => {
   const [semester, setSemester] = useState(1);
@@ -25,8 +27,13 @@ export const Marks = () => {
   const student = useStudent();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("tablet"));
+  const token = useToken();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!student && token) {
+      dispatch(refreshInfo(token));
+    }
     if (!student) {
       setSubjects([]);
       return;
@@ -36,7 +43,7 @@ export const Marks = () => {
         return subject.semesters[semester - 1].include;
       })
     );
-  }, [student, semester, setSubjects]);
+  }, [student, semester, setSubjects, token, dispatch]);
 
   return (
     <ContainerCustom>

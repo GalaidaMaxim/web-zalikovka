@@ -11,9 +11,20 @@ import {
   TableCell,
   TableRow,
 } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useToken } from "../redux/selectors";
+import { refreshInfo } from "../redux/operations";
 
 export const EducationPlan = () => {
   const student = useStudent();
+  const dispatch = useDispatch();
+  const token = useToken();
+  useEffect(() => {
+    if (!student && token) {
+      dispatch(refreshInfo(token));
+    }
+  }, [token, student, dispatch]);
 
   return (
     <ContainerCustom>
